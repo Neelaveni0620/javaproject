@@ -14,7 +14,7 @@ pipeline{
         stage('prod'){
             steps{
             sshagent(['declarativepipeline']) {
-            sh 'scp -o StrictHostKeyChecking=false target/javaproject.war ec2-user@3.26.145.25:/opt/apache-tomcat-9.0.74/webapps/'
+            sh 'scp -o StrictHostKeyChecking=false target/javaproject.war ec2-user@13.239.31.179:/opt/apache-tomcat-9.0.74/webapps/'
         }
         }
     }
