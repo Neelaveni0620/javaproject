@@ -1,0 +1,22 @@
+pipeline{
+    agent any
+    stages{
+        stage('checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/Neelaveni0620/javaproject.git'            }
+        }
+        stage('build'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+        stage('prod'){
+            steps{
+            sshagent(['sshAgentkey']) {
+    
+            sh 'scp -o StrictHostKeyChecking=false target/javaproject.war ec2-user@13.239.31.179:/opt/apache-tomcat-9.0.74/webapps/'
+        }
+        }
+    }
+}
+}
